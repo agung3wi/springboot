@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,15 +17,23 @@ import com.agung.project.model.Divisi;
 public class DivisiDao {
     
     @PersistenceContext
-    EntityManager entityManager;
+    private EntityManager entityManager;
     
     public Divisi findOne( long id ){
         return entityManager.find( Divisi.class, id );
     }
 	    
 	    public List< Divisi > findAll(){
-	        return entityManager.createQuery( "from " + Divisi.class.getName() )
-	        .getResultList();
+	    	Query query = entityManager.createNativeQuery(
+	    	        "SELECT * FROM m_divisi", Divisi.class);
+	    	    return query.getResultList();
+	    }
+	    
+	    public long count(){
+	    	Query query = entityManager.createNativeQuery(
+	    	        "SELECT COUNT(1) AS id FROM m_divisi", Divisi.class);
+	    	Divisi row = (Divisi) query.getSingleResult();
+	    	return row.id;
 	    }
 	 
 	    public void create( Divisi entity ){

@@ -46,6 +46,9 @@ public class RestController {
     
 	@Autowired
 	private DivisiDao divisiDao;
+	
+	@Autowired
+	private GetRest service;
     
     @PersistenceContext
 	EntityManager entityManager;
@@ -66,11 +69,11 @@ public class RestController {
     public ResponseEntity<Map> addRest(@RequestBody Divisi divisi) throws CoreException {
     	
     	try {
-    		GetRest service = new GetRest();
+//    		GetRest service;
     		Map input = new HashMap();
-    		service.execute(input);
+    		Map output = service.execute(input);
     		
-            return CoreResponse.ok(input);
+            return CoreResponse.ok(output);
     	} catch (CoreException ex) {
     	    return CoreResponse.fail(ex);
     	}
@@ -80,8 +83,8 @@ public class RestController {
     public ResponseEntity<Divisi>  addDivisi(@RequestBody Divisi input) {
     	
     	Divisi divisi = new Divisi();
-		divisi.divName = "ssas";
-		divisi.divCode = "ASS1";
+		divisi.div_name = "ssas";
+		divisi.divCode = "ASS2";
 		divisi.createdBy = -1;
 		divisi.updatedBy = -1;
 		divisi.createdAt = "yyy";

@@ -1,13 +1,16 @@
 package com.agung.project.model;
 
 import javax.persistence.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.io.Serializable;
 
 @Entity
 @Table(name = "m_divisi")
 
-public class Divisi extends BaseModel implements Serializable {
-
+public class Divisi implements Serializable {
+	
 	@Id
 	@Column (name = "id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="m_divisi_id_seq")
@@ -15,7 +18,7 @@ public class Divisi extends BaseModel implements Serializable {
     public long id;
 	
 	@Column (name = "div_name")
-	public String divName;
+	public String div_name;
 	
 	@Column (name = "div_code")
 	public String divCode;
@@ -34,5 +37,9 @@ public class Divisi extends BaseModel implements Serializable {
 	
 	@Column (name = "version")
     public long version;
+	
+//	@OneToOne(optional=true)
+//    @JoinColumn(name = "created_by", referencedColumnName = "id", nullable = true, insertable=false, updatable=false)
+//    private User user;
 
 }
