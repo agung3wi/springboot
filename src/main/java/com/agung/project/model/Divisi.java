@@ -15,7 +15,7 @@ public class Divisi implements Serializable {
 	@Column (name = "id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="m_divisi_id_seq")
     @SequenceGenerator(name="m_divisi_id_seq", sequenceName="m_divisi_id_seq", allocationSize=1)
-    public long id;
+	public long id;
 	
 	@Column (name = "div_name")
 	public String div_name;

@@ -1,14 +1,16 @@
 package com.agung.project.core;
 
+import java.util.List;
 import java.util.Map;
+ 
 public class CoreException extends Exception {
 
-	private String errorMessage;
-	private Map errorList;
+	public String errorMessage;
+	public Map errorList;
 
-	public CoreException(String errorMessage, Map errorList){
-		this.errorMessage = errorMessage;
-		this.errorList = errorList;
+	public CoreException(String message, Map errList){
+		this.errorMessage = message;
+		this.errorList = errList;
 	}
 
 	public String getErrorMessage(){

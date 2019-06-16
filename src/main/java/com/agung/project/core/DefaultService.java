@@ -8,6 +8,6 @@ import com.agung.project.core.CoreException;
 
 public interface DefaultService {
 	
-	public Map execute(Map input)  throws CoreException ;
+	public Object execute(Map input)  throws CoreException ;
 
 }

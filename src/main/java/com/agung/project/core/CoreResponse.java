@@ -13,7 +13,7 @@ public class CoreResponse {
     private String errorMessage;
 	private Map errorList;
 	
-	public static ResponseEntity<Map> ok(Map output){
+	public static ResponseEntity<Map> ok(Object output){
         Map response = new HashMap();
         response.put("success", true);
         response.put("result", output);
