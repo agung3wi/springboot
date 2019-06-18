@@ -8,6 +8,7 @@ import com.agung.project.core.CoreException;
 
 public interface DefaultService {
 	
+	public String getTask(); 
 	public Object execute(Map input)  throws CoreException ;
 
 }

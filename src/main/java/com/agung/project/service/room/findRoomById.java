@@ -1,4 +1,4 @@
-package com.agung.project.service;
+package com.agung.project.service.room;
 
 import com.agung.project.core.CoreService;
 import com.agung.project.core.DefaultService;
@@ -12,30 +12,27 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class GetAdvanceRoom extends CoreService implements DefaultService {
+public class findRoomById extends CoreService implements DefaultService {
 	
 	@Autowired
 	private DB db;
 	public String task = "";
+	
+	public String getTask() {
+		return "view-user";
+	}
 	
 	public Map prepare(Map input) {
 		return input;
 	}
 	
 	public Map process(Map input, Map originalInput) {
+				
+		String sql = "SELECT A.*, B.gh_name FROM m_room A  INNER JOIN m_green_house B"
+				+ " ON B.id=A.gh_id WHERE A.id= :id";
 		
-		Map result = new HashMap();
-		ObjectMapper oMapper = new ObjectMapper();
+		Map row = db.row(sql, input);
 		
-		Map param = new HashMap();
-		param.put("param", true);
-		
-		result.put("data", db.select("SELECT A.*, B.gh_name FROM m_room A  INNER JOIN m_green_house B"
-				+ " ON B.id=A.gh_id WHERE :param", param));
-		
-		
-		result.put("total", 10);
-		Map map = oMapper.convertValue(result, Map.class);
-		return (Map) map;
+		return row;
 	}
 }

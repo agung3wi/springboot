@@ -11,8 +11,9 @@ import com.agung.project.core.DefaultService;
 public abstract class CoreService implements DefaultService {
 
 
+	abstract public String getTask();
 	abstract protected Map prepare(Map input) throws CoreException;
-	abstract protected Object process(Map input, Map originalInput);
+	abstract protected Object process(Map input, Map originalInput) throws CoreException;
 
 	public Object execute(Map input) throws CoreException {
 

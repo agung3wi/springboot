@@ -1,10 +1,9 @@
-package com.agung.project.service;
+package com.agung.project.service.room;
 
 import com.agung.project.core.CoreException;
 import com.agung.project.core.CoreService;
 import com.agung.project.core.DefaultService;
 import com.agung.project.util.DB;
-import com.agung.project.model.Room;
 import com.agung.project.util.ValidationUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,10 @@ public class AddRoom extends CoreService implements DefaultService {
 
 	@PersistenceContext
     private EntityManager entityManager;
-	public String task = "";
+	
+	public String getTask() {
+		return "view-user";
+	}
 	
 	public Map prepare(Map input) throws CoreException {
 		Map validation = new HashMap();
@@ -42,22 +44,21 @@ public class AddRoom extends CoreService implements DefaultService {
 	
 	public Map process(Map input, Map originalInput) {
 		
-//		System.out.print(input);
-		Room room = new Room();
-		room.ghId = (int) input.get("gh_id");
-		room.roomName = (String) input.get("room_name");
-		room.nRow = Integer.parseInt((String) input.get("n_row"));
-		room.nColumn = Integer.parseInt((String) input.get("n_column"));
-		room.createdAt = "20180201010";
-		room.updatedAt = "20180201010";
-		room.createdBy = 0;
-		room.updatedBy = 0;
-		room.version = 0;
+		int nRow = Integer.parseInt((String) input.get("n_row"));
+		input.replace("n_row", nRow);
 		
-		db.insert(room);
+		int nCol = Integer.parseInt((String) input.get("n_column"));
+		input.replace("n_column", nCol);
+		input.put("created_at", "20180201010");
+		input.put("updated_at", "20180201010");
+		input.put("created_by", -1);
+		input.put("updated_by", -1);
+		input.put("version", 0);
+		input.remove("_session");
+		db.insert("m_room", input);
 		
 		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("data", room);
+		result.put("data", input);
 		return result;
 	}
 }

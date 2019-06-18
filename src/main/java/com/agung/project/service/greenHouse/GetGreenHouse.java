@@ -1,4 +1,4 @@
-package com.agung.project.service;
+package com.agung.project.service.greenHouse;
 
 import com.agung.project.core.CoreService;
 import com.agung.project.core.DefaultService;
@@ -16,6 +16,10 @@ public class GetGreenHouse extends CoreService implements DefaultService {
 	
 	@Autowired
 	private DB db;
+	
+	public String getTask() {
+		return "view-user";
+	}
 	
 	public Map prepare(Map input) {
 		return input;
